@@ -22,9 +22,8 @@ ANSWER=$( curl --silent \
   -d ${MAGIC_POST} \
   ${POST_TRACKER_BASE_URL} )
 
-#echo $ANSWER
 echo $ANSWER | egrep -o "VALUES \(.*?\)" \
-			 | sed "s/^VALUES (//g" | sed "s/)$//g" | sed "s/NULL/''/g" \
+			 | sed "s/^VALUES (//g;s/)$//g;s/NULL/''/g" \
 			 | awk '
 BEGIN {FS="\x27, \x27"} 
 {
